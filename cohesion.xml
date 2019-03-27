@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/jms 
+                           http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+                           
+  <context:property-placeholder location="classpath:main.properties" />
+  <context:annotation-config />
+  <context:component-scan base-package="com.metlife"/>
+ 
+ 
+   <bean id="cohesionProviders" class="com.metlife.investments.cohesion.providers.CohesionProviders">
+    <property name="jmsProviders">
+      <value>activeMQQueueFactory,activeMQTopicFactory,ibmMQQueueFactory,ibmMQTopicFactory</value>
+    </property>
+   </bean>
+ 
+    <bean id="serviceRegistry" class="com.metlife.investments.cohesion.providers.registry.FileRegistryService">
+    <property name="registryFile">
+      <value>registry.json</value>
+    </property>    </bean>
+  
+ <!-- These beans are used to initialize cohesionJ for ActiveMQ -->
+  <bean id="activeMQQueueFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    <property name="brokerURL">
+      <value>${activemq_broker_url}</value>
+    </property>
+  </bean>
+  
+  <bean id="activeMQTopicFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    <property name="brokerURL">
+      <value>${activemq_broker_url}</value>
+    </property>
+  </bean>
+  
+                             
+  <!-- These beans are used to initialize cohesionJ for IBM WebSphere MQ -->
+
+  <bean id="ibmMQQueueFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+    <property name="hostName">
+      <value>${ibmmq_queue_hostname}</value>
+    </property>
+    <property name="port">
+      <value>${ibmmq_queue_port}</value>
+    </property>
+    <property name="queueManager">
+      <value>${ibmmq_queue_manager}</value>
+    </property>
+    <property name="transportType">
+      <value>1</value>
+    </property>
+  </bean>
+	 
+  <!-- WebSphere MQ Topic Connection Factory -->
+  <bean id="ibmMQTopicFactory" class="com.ibm.mq.jms.MQTopicConnectionFactory">
+    <property name="hostName">
+      <value>${ibmmq_queue_hostname}</value>
+    </property>
+    <property name="port">
+      <value>${ibmmq_queue_port}</value>
+    </property>
+    <property name="queueManager">
+      <value>${ibmmq_queue_manager}</value>
+    </property>
+    <property name="transportType">
+      <value>1</value>
+    </property>
+  </bean>
+
+</beans>
+
