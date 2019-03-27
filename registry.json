@@ -1,0 +1,80 @@
+{
+    "RegistryEntries": [
+        {
+            "Id": "99",
+            "Type": "http",
+            "Domain": "derivatives",
+            "Path": "/trades",
+            "Properties": [ { "Property": "format", "Value": "xml" } ],
+            "Endpoint": {
+                "URI": "http://localhost:9999/derivtrades.xml",
+                "Format": "xml"
+            }
+        },
+        {
+            "Id": "100",
+            "Type": "http",
+            "Domain": "derivatives",
+            "Path": "/trades",
+            "Properties": [ { "Property": "format", "Value": "json" } ],
+            "Endpoint": {
+                "URI": "http://localhost:9999/derivtrades.json",
+                "Format": "json"
+            }
+        },
+        {
+            "Id": "102",
+            "Type": "http",
+            "Domain": "derivatives",
+            "Path": "/positions",
+            "Properties": [ { "Property": "format", "Value": "xml" } ],
+            "Endpoint": {
+                "URI": "http://localhost:9999/derivpos.xml",
+                "Format": "xml"
+            }
+        },
+        {
+            "Id": "103",
+            "Type": "http",
+            "Domain": "orders",
+            "Path": "/order1",
+            "Properties": [  ],
+            "Endpoint": {
+                "URI": "http://localhost:8888/order1.xml",
+                "Format": "xml"
+            }
+        },
+        {
+            "Id": "104",
+            "Type": "http",
+            "Domain": "orders",
+            "Path": "/order2",
+            "Properties": [  ],
+            "Endpoint": {
+                "URI": "http://localhost:8888/order1_wout_root.json",
+                "Format": "json"
+            }
+        },
+        {
+            "Id": "105",
+            "Type": "jms",
+            "Domain": "derivatives",
+            "Path": "/collateral/csa",
+            "Properties": [ ],
+            "Endpoint": { "URI": "jms:METLIFE.INVESTMENTS.TRADE.UPDATE",
+                          "Format": "xml"
+            }
+        },
+         {
+            "Id": "106",
+            "Type": "http",
+            "Domain": "orders",
+            "Path": "/",
+            "Properties": [  ],
+            "Endpoint": {
+                "URI": "http://localhost:8888/orderlist1.xml",
+                "Format": "xml"
+            }
+        }
+    ]
+}
